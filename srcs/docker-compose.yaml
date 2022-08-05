@@ -1,0 +1,20 @@
+version: "3"
+services:
+  nginx:
+    build: NGINX/
+    container_name: NGINX
+    restart: always
+    depends_on:
+      - "wordpress"
+
+  wordpress:
+    build: WordPress/
+    container_name: WordPress
+    restart: always
+    depends_on:
+      - "mariadb"
+
+  mariadb:
+    build: MariaDB/
+    container_name: MariaDB
+    restart: always
