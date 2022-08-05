@@ -1,20 +1,20 @@
 version: "3"
 services:
   nginx:
-    build: NGINX/
+    build: requirements/NGINX/
     container_name: NGINX
     restart: always
     depends_on:
       - "wordpress"
 
   wordpress:
-    build: WordPress/
+    build: requirements/WordPress/
     container_name: WordPress
     restart: always
     depends_on:
       - "mariadb"
 
   mariadb:
-    build: MariaDB/
+    build: requirements/MariaDB/
     container_name: MariaDB
     restart: always
