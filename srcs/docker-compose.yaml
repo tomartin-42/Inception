@@ -18,3 +18,5 @@ services:
     build: requirements/MariaDB/
     container_name: MariaDB
     restart: always
+    env_file:
+      - .env
