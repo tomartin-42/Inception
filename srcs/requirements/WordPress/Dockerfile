@@ -1,11 +1,10 @@
 FROM	debian:stable-20220801
 
 RUN	apt-get	update \
-	&& apt-get install -y wordpress
+	&& apt-get install -y wordpress \
+	&& apt-get install -y wget
 
 RUN	mkdir -p /run/php
-
-COPY	/tools/www.conf /etc/php/7.3/fpm/pool.d
 
 COPY	/tools/wp-config.php /tmp/
 
