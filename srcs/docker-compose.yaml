@@ -4,18 +4,31 @@ services:
     build: requirements/NGINX/
     container_name: NGINX
     restart: always
-    depends_on:
-      - "wordpress"
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - server:/var/www/html/
+    networks:
+      - front
+    depends_on:
+      - "wordpress"
 
   wordpress:
     build: requirements/WordPress/
     container_name: WordPress
-    restart: always
+    env_file:
+      - .env
+    ports:
+      - "9000:9000"
+    volumes:
+      - server:/var/www/html
+    networks:
+      - front
+      - back
     depends_on:
       - "mariadb"
+    restart: always
 
   mariadb:
     build: requirements/MariaDB/
@@ -23,3 +36,27 @@ services:
     restart: always
     env_file:
       - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - sql:/var/lib/myswl/
+    networks:
+      - back
+
+volumes:
+  server:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/tomartin/data/webserver'
+  sql:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/tomartin/data/mysql'
+
+networks:
+  front:
+  back:
