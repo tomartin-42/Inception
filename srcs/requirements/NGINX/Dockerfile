@@ -13,6 +13,6 @@ RUN openssl req -x509 -nodes -days 365 -subj \
 RUN rm -rf /etc/nginx/sites-enabled/*
 
 #Copy configuration file
-#COPY default.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/conf.d/
 
 CMD	nginx -g 'daemon off;'
