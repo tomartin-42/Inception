@@ -1,10 +1,15 @@
 FROM	debian:stable-20220801
 
+ARG	DB_NAME MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_USER MYSQL_PASSWORD MYSQL_USER MYSQL_PASSWORD
+
 RUN	apt-get	update \
 	&& apt-get install -y mariadb-server
 
-RUN	service mariadb start; \
-	mysql -e \
+RUN	service mariadb start;
+
+#RUN	echo ${DB_NAME} ${MYSQL_ADMIN_USER} ${MYSQL_ROOT_PASSWORD} ${MYSQL_ADMIN_USER} ${MYSQL_ROOT_PASSWORD} ${MYSQL_USER} ${MYSQL_PASSWORD} ${MYSQL_USER} ${MYSQL_PASSWORD} > /tmp/logs;
+
+RUN	mysql -e \
 	"CREATE DATABASE IF NOT EXISTS ${DB_NAME}; \
 	CREATE USER IF NOT EXISTS '${MYSQL_ADMIN_USER}' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}'; \
 	GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ADMIN_USER}' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}; \
@@ -12,9 +17,11 @@ RUN	service mariadb start; \
 	GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}' IDENTIFIED BY '${MYSQL_PASSWORD}'; \
 	FLUSH PRIVILEGES";
 
-COPY	/tools/50-server.cnf etc/mysql/mariadb.conf.d/
+#COPY	/tools/50-server.cnf etc/mysql/mariadb.conf.d/
 
-COPY	/tools/configure.sh .
+#COPY	/tools/configure.sh .
 
-CMD	["/bin/sh"]
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
+#CMD	["/bin/sh"]
 #CMD	["mariadb"]
