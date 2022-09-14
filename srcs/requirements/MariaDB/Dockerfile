@@ -1,7 +1,7 @@
 FROM	debian:stable-20220801
 
 # To add .env variables
-# The var expansion 
+# The var expansion what's going on Dockerfile
 ARG	DB_NAME MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_USER MYSQL_PASSWORD MYSQL_USER MYSQL_PASSWORD
 
 RUN	apt-get	update \
@@ -13,9 +13,7 @@ RUN	service mariadb start; \
 #RUN	echo ${DB_NAME} ${MYSQL_ADMIN_USER} ${MYSQL_ROOT_PASSWORD} ${MYSQL_ADMIN_USER} ${MYSQL_ROOT_PASSWORD} ${MYSQL_USER} ${MYSQL_PASSWORD} ${MYSQL_USER} ${MYSQL_PASSWORD} > /tmp/logs;
 
 
-#COPY	/tools/50-server.cnf etc/mysql/mariadb.conf.d/
-
-#COPY	/tools/configure.sh .
+COPY	/tools/50-server.cnf etc/mysql/mariadb.conf.d/
 
 #To debug
 #ENTRYPOINT ["tail", "-f", "/dev/null"]

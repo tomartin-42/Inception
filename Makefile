@@ -16,8 +16,16 @@ ALL_CONTAINERS:= $(shell docker ps -a -q)
 all:
 	docker compose -f $(COMPOSE_PATH) up -d
 
+clean: stop prune
+
 reset:
 	docker rm $(ALL_CONTAINERS) -f
 	docker system prune -af
 
 re: reset all
+
+stop:
+	docker compose -f $(COMPOSE_PATH) down
+
+prune:
+	docker system prune -af
