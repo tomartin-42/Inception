@@ -20,3 +20,4 @@ reset:
 	docker rm $(ALL_CONTAINERS) -f
 	docker system prune -af
 
+re: reset all
