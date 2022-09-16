@@ -17,48 +17,53 @@ services:
   #    options:
   #      max-size: "10m"
   #      max-file: "3"
-
-  #  wordpress:
-  #  container_name: WordPress
-  #  build: requirements/WordPress/
-  #  env_file:
-  #    - .env
-  #  ports:
-  #    - "9000:9000"
-  #  volumes:
-  #    - server:/var/www/html
-  #  networks:
-  #    - front
-  #    - back
-  #  depends_on:
-  #    - "mariadb"
-  #  restart: always
-  #  logging:
-  #    options:
-  #      max-size: "10m"
-  #      max-file: "3"
-
-  mariadb:
-    container_name: MariaDB
-    build: 
-      context: requirements/MariaDB/
-  # restart: always
+  
+  wordpress:
+    container_name: WordPress
+    build:
+      context: requirements/WordPress/
       args:
         MYSQL_ADMIN_USER: ${MYSQL_ADMIN_USER}
         MYSQL_ADMIN_PASSWORD: ${MYSQL_ADMIN_PASSWORD}
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         DB_NAME: ${DB_NAME}
+    #restart: always
     ports:
-      - "3306:3306"
+      - "9000:9000"
     volumes:
-      - sql:/var/lib/myswl/
+      - server:/var/www/html
     networks:
+      - front
       - back
+    depends_on:
+      - "mariadb"
     logging:
       options:
         max-size: "10m"
         max-file: "3"
+
+          #  mariadb:
+          #    container_name: MariaDB
+          #    build: 
+          #      context: requirements/MariaDB/
+          #      args:
+          #        MYSQL_ADMIN_USER: ${MYSQL_ADMIN_USER}
+          #        MYSQL_ADMIN_PASSWORD: ${MYSQL_ADMIN_PASSWORD}
+          #        MYSQL_USER: ${MYSQL_USER}
+          #        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+          #        DB_NAME: ${DB_NAME}
+          #    restart: always
+          #    ports:
+          #      - "3306:3306"
+          #    volumes:
+          #      - sql:/var/lib/myswl/
+          #    networks:
+          #      - back
+          #    logging:
+          #      options:
+          #        max-size: "10m"
+          #        max-file: "3"
 
 volumes:
   server:
