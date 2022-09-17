@@ -29,3 +29,10 @@ stop:
 
 prune:
 	docker system prune -af
+
+down_up:
+	docker compose -f $(COMPOSE_PATH) down
+	docker compose -f $(COMPOSE_PATH) up -d
+
+down:
+	docker compose -f $(COMPOSE_PATH) down
