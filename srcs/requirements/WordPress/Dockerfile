@@ -10,18 +10,16 @@ RUN	apt-get	update \
 	&& apt-get install -y php-mysqli \
 	&& apt-get install -y wordpress \
 	&& apt-get install -y wget
-#	&& apt-get install -y php.fpm \
 
-#RUN	touch /var/www/html/hola.txt
+RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+	&& chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-#RUN	mv /usr/share/wordpress /var/www/html/
+COPY	/tools/wp-config.php /usr/share/wordpress/
+
+RUN	sed -i "s/database_name_here/$DB_NAME/g" /usr/share/wordpress/wp-config.php \
+	&& sed -i "s/username_here/$MYSQL_USER/g" /usr/share/wordpress/wp-config.php \
+	&& sed -i "s/password_here/$MYSQL_PASSWORD/g" /usr/share/wordpress/wp-config.php
+
 CMD	["mv", "/usr/share/wordpress", "/var/www/html/"]
-#RUN	sed -i "s/Database_name/$DB_NAME/g" /usr/share/webapps/wordpress/wp-config.php \
-#	&& sed -i "s/Database_user/$MYSQL_USER/g" /usr/share/webapps/wordpress/wp-config.php \
-#	&& sed -i "s/Database_password/$MYSQL_PASSWORD/g" /usr/share/webapps/wordpress/wp-config.php
-#RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-#COPY	/tools/configure.sh .
-#CMD	["touch", "/var/www/html/hola2.txt"]
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
-#CMD	["./configure.sh"]
