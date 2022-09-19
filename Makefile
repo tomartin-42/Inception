@@ -12,17 +12,26 @@ WP_PATH = $(REQS_PATH)WordPress
 WP_CONTAINER = WordPress
 
 ALL_CONTAINERS:= $(shell docker ps -a -q)
+ALL_VOLUMES:= $(shell docker volume ls -q)
 
 all:
 	docker compose -f $(COMPOSE_PATH) up -d
 
-clean: stop prune
+clean: 
+	docker compose -f $(COMPOSE_PATH) down
+	docker rm -f $(ALL_CONTAINERS)
+	docker volume rm $(ALL_VOLUMES)
 
 reset:
 	docker rm $(ALL_CONTAINERS) -f
+	docker volume rm $(ALL_VOLUMES)
 	docker system prune -af
 
 re: reset all
+
+del_volumes:
+	docker volume rm $(ALL_VOLUMES)
+
 
 stop:
 	docker compose -f $(COMPOSE_PATH) down
@@ -30,9 +39,7 @@ stop:
 prune:
 	docker system prune -af
 
-down_up:
-	docker compose -f $(COMPOSE_PATH) down
-	docker compose -f $(COMPOSE_PATH) up -d
+down_up: clean all
 
 down:
 	docker compose -f $(COMPOSE_PATH) down
