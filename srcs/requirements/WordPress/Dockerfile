@@ -8,18 +8,34 @@ RUN	apt-get	update \
 	&& apt-get install -y php \
 	&& apt-get install -y php-fpm \
 	&& apt-get install -y php-mysqli \
-	&& apt-get install -y wordpress \
+#	&& apt-get install -y wordpress \
 	&& apt-get install -y wget
+
+COPY	/tools/www.conf /etc/php/7.4/fpm/pool.d
 
 RUN	wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 
-COPY	/tools/wp-config.php /usr/share/wordpress/
 
-RUN	sed -i "s/database_name_here/$DB_NAME/g" /usr/share/wordpress/wp-config.php \
-	&& sed -i "s/username_here/$MYSQL_USER/g" /usr/share/wordpress/wp-config.php \
-	&& sed -i "s/password_here/$MYSQL_PASSWORD/g" /usr/share/wordpress/wp-config.php
+WORKDIR	/tmp/ 	
 
-CMD	["mv", "/usr/share/wordpress", "/var/www/html/"]
+COPY	/tools/conf.sh /tmp/
+
+COPY	/tools/wp-config.php /tmp/
+
+COPY	/tools/conf.sh /tmp/
+
+#RUN	wp core download --allow-root 
+
+RUN	sed -i "s/database_name_here/$DB_NAME/g" /tmp/wp-config.php \
+	&& sed -i "s/username_here/$MYSQL_USER/g" /tmp/wp-config.php \
+	&& sed -i "s/password_here/$MYSQL_PASSWORD/g" /tmp/wp-config.php
+
+#RUN	wp core install --url=tomartin.42.fr --title=Inception --admin_user=$MYSQL_USER --admin_password=$MYSQL_PASSWORD --admin_email=info@example.com --allow-root
+
+#COPY	/tools/wp-config.php /usr/share/wordpress/
+
+
+CMD	["./conf.sh"]
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
