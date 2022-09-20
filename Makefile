@@ -36,6 +36,7 @@ del_volumes:
 stop:
 	docker compose -f $(COMPOSE_PATH) down
 
+
 prune:
 	docker system prune -af
 
