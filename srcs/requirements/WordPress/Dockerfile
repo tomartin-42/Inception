@@ -35,7 +35,6 @@ RUN	sed -i "s/database_name_here/$DB_NAME/g" /tmp/wp-config.php \
 
 #COPY	/tools/wp-config.php /usr/share/wordpress/
 
-
-CMD	["./conf.sh"]
+CMD	["./conf.sh", "$MYSQL_USER", "$MYSQL_PASSWORD"]
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
