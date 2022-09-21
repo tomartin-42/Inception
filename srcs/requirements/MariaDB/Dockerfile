@@ -1,4 +1,4 @@
-FROM	debian:stable-20220801
+FROM	debian:buster
 
 # To add .env variables
 # The var expansion what's going on Dockerfile

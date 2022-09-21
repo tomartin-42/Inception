@@ -36,34 +36,34 @@ services:
     networks:
       - front
       - back
-        #    depends_on:
-        # - "mariadb"
+    #depends_on:
+      #- "mariadb"
     logging:
       options:
         max-size: "10m"
         max-file: "3"
 
-          #  mariadb:
-          #    container_name: MariaDB
-          #    build: 
-          #      context: requirements/MariaDB/
-          #      args:
-          #        MYSQL_ADMIN_USER: ${MYSQL_ADMIN_USER}
-          #        MYSQL_ADMIN_PASSWORD: ${MYSQL_ADMIN_PASSWORD}
-          #        MYSQL_USER: ${MYSQL_USER}
-          #        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-          #        DB_NAME: ${DB_NAME}
-          #    restart: always
-          #    ports:
-          #      - "3306:3306"
-          #    volumes:
-          #      - sql:/var/lib/myswl/
-          #    networks:
-          #      - back
-          #    logging:
-          #      options:
-          #        max-size: "10m"
-          #        max-file: "3"
+# mariadb:
+#   container_name: MariaDB
+#   build: 
+#     context: requirements/MariaDB/
+#     args:
+#       MYSQL_ADMIN_USER: ${MYSQL_ADMIN_USER}
+#       MYSQL_ADMIN_PASSWORD: ${MYSQL_ADMIN_PASSWORD}
+#       MYSQL_USER: ${MYSQL_USER}
+#       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+#       DB_NAME: ${DB_NAME}
+#       #restart: always
+#   ports:
+#     - "3306:3306"
+#   volumes:
+#     - sql:/var/lib/myswl/
+#   networks:
+#     - back
+#   logging:
+#     options:
+#       max-size: "10m"
+#       max-file: "3"
 
 volumes:
   server:

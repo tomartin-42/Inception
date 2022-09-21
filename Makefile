@@ -26,6 +26,7 @@ reset:
 	docker rm $(ALL_CONTAINERS) -f
 	docker volume rm $(ALL_VOLUMES)
 	docker system prune -af
+	rm -rf /home/tomartin/Inception/data/webserver/wordpress
 
 re: reset all
 
@@ -36,7 +37,6 @@ del_volumes:
 stop:
 	docker compose -f $(COMPOSE_PATH) down
 
-
 prune:
 	docker system prune -af
 
@@ -44,3 +44,6 @@ down_up: clean all
 
 down:
 	docker compose -f $(COMPOSE_PATH) down
+
+inW:
+	docker exec -it WordPress bash
