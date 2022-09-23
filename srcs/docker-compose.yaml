@@ -71,7 +71,8 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/tomartin/Inception/data/webserver'
+      device: '/home/tomartin/Inception/data'
+      #device: '/home/tomartin/Inception/data/webserver'
   sql:
     #driver: local
     driver_opts:

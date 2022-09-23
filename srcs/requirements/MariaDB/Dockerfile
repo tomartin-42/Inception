@@ -2,7 +2,7 @@ FROM	debian:buster
 
 # To add .env variables
 # The var expansion what's going on Dockerfile
-ARG	DB_NAME MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_USER MYSQL_PASSWORD MYSQL_USER MYSQL_PASSWORD
+ARG	DB_NAME MYSQL_ADMIN_USER MYSQL_ROOT_PASSWORD MYSQL_USER MYSQL_PASSWORD
 
 RUN	apt-get	update \
 	&& apt-get install -y mariadb-server

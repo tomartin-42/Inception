@@ -15,7 +15,7 @@ ALL_CONTAINERS:= $(shell docker ps -a -q)
 ALL_VOLUMES:= $(shell docker volume ls -q)
 
 all:
-	mkdir /home/tomartin/Inception/data/webserver/wordpress
+	#mkdir /home/tomartin/Inception/data/webserver
 	mkdir /home/tomartin/Inception/data/mysql
 	docker compose -f $(COMPOSE_PATH) up -d
 
@@ -28,7 +28,7 @@ reset:
 	docker rm $(ALL_CONTAINERS) -f
 	docker volume rm $(ALL_VOLUMES)
 	docker system prune -af
-	rm -rf /home/tomartin/Inception/data/webserver/wordpress
+	rm -rf /home/tomartin/Inception/data/wordpress
 	rm -rf /home/tomartin/Inception/data/mysql
 
 re: reset all
