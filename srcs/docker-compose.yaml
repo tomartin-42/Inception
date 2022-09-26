@@ -28,6 +28,7 @@ services:
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         DB_NAME: ${DB_NAME}
+        DB_HOST: ${DB_HOST}
     #restart: always
     ports:
       - "9000:9000"
@@ -53,6 +54,7 @@ services:
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         DB_NAME: ${DB_NAME}
+        DB_HOST: ${DB_HOST}
     #restart: always
     ports:
       - "3306:3306"
@@ -67,14 +69,14 @@ services:
 
 volumes:
   server:
-    #driver: local
+    driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/tomartin/Inception/data'
-      #device: '/home/tomartin/Inception/data/webserver'
+      #device: '/home/tomartin/Inception/data'
+      device: '/home/tomartin/Inception/data/'
   sql:
-    #driver: local
+    driver: local
     driver_opts:
       type: 'none'
       o: 'bind'

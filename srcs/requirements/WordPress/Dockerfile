@@ -1,6 +1,6 @@
 FROM	debian:buster
 
-ARG     DB_NAME MYSQL_ADMIN_USER MYSQL_ADMIN_PASSWORD MYSQL_USER MYSQL_PASSWORD
+ARG     DB_NAME MYSQL_ADMIN_USER MYSQL_ADMIN_PASSWORD MYSQL_USER MYSQL_PASSWORD DB_HOST
 
 RUN	mkdir -p /run/php
 
@@ -25,7 +25,8 @@ COPY	/tools/wp-config.php /tmp/wordpress/
 
 RUN	sed -i "s/database_name_here/$DB_NAME/g" /tmp/wordpress/wp-config.php \
 	&& sed -i "s/username_here/$MYSQL_USER/g" /tmp/wordpress/wp-config.php \
-	&& sed -i "s/password_here/$MYSQL_PASSWORD/g" /tmp/wordpress/wp-config.php
+	&& sed -i "s/password_here/$MYSQL_PASSWORD/g" /tmp/wordpress/wp-config.php \
+	&& sed -i "s/db_name_here/$DB_HOST/g" /tmp/wordpress/wp-config.php
 
 #RUN	mv /tmp/wordpress /var/www/html/
 
