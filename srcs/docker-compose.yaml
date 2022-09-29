@@ -3,8 +3,8 @@ services:
 
   nginx:
     container_name: NGINX
-    build: requirements/NGINX/
     restart: always
+    build: requirements/NGINX/
     ports:
       - "443:443"
     volumes:
@@ -20,6 +20,7 @@ services:
   
   wordpress:
     container_name: WordPress
+    restart: always
     build:
       context: requirements/WordPress/
       args:
@@ -29,7 +30,6 @@ services:
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         DB_NAME: ${DB_NAME}
         DB_HOST: ${DB_HOST}
-    restart: always
     ports:
       - "9000:9000"
     volumes:
@@ -46,6 +46,7 @@ services:
 
   mariadb:
     container_name: MariaDB
+    restart: always
     build: 
       context: requirements/MariaDB/
       args:
@@ -55,7 +56,6 @@ services:
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         DB_NAME: ${DB_NAME}
         DB_HOST: ${DB_HOST}
-    restart: always
     ports:
       - "3306:3306"
     volumes:

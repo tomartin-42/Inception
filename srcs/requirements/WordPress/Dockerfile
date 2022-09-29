@@ -28,6 +28,4 @@ RUN	sed -i "s/database_name_here/$DB_NAME/g" /tmp/wordpress/wp-config.php \
 	&& sed -i "s/password_here/$MYSQL_PASSWORD/g" /tmp/wordpress/wp-config.php \
 	&& sed -i "s/db_name_here/$DB_HOST/g" /tmp/wordpress/wp-config.php
 
-#RUN	mv /tmp/wordpress /var/www/html/
-
-ENTRYPOINT	["./conf.sh"]
+CMD	["./conf.sh"]

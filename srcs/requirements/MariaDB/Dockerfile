@@ -14,6 +14,4 @@ RUN	service mysql start; \
 
 COPY	/tools/50-server.cnf etc/mysql/mariadb.conf.d/
 
-#To debug
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
 CMD	["mysqld"]
