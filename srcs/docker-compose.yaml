@@ -74,13 +74,13 @@ volumes:
       type: 'none'
       o: 'bind'
       #device: '/home/tomartin/Inception/data'
-      device: '/home/tomartin/Inception/data/'
+      device: "${HOME}/data/"
   sql:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/tomartin/Inception/data/mysql'
+      device: "${HOME}/data/mysql"
 
 networks:
   front:

@@ -16,7 +16,8 @@ ALL_VOLUMES:= $(shell docker volume ls -q)
 
 all:
 	#mkdir /home/tomartin/Inception/data/webserver
-	mkdir /home/tomartin/Inception/data/mysql
+	mkdir -p $(HOME)/data/
+	mkdir -p $(HOME)/data/mysql/
 	docker compose -f $(COMPOSE_PATH) up -d
 
 clean: 
@@ -28,14 +29,12 @@ reset:
 	docker rm $(ALL_CONTAINERS) -f
 	docker volume rm $(ALL_VOLUMES)
 	docker system prune -af
-	rm -rf /home/tomartin/Inception/data/wordpress
-	rm -rf /home/tomartin/Inception/data/mysql
+	sudo rm -r $(HOME)/data
 
 re: reset all
 
 del_volumes:
 	docker volume rm $(ALL_VOLUMES)
-
 
 stop:
 	docker compose -f $(COMPOSE_PATH) down
@@ -50,3 +49,6 @@ down:
 
 inW:
 	docker exec -it WordPress bash
+
+inM:
+	docker exec -it MariaDB bash
