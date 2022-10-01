@@ -6,7 +6,7 @@ RUN	apt-get	update \
 	&& apt-get install -y mariadb-server
 
 #------------------------------------
-RUN	mkdir -p /var/lin/mysql
+#RUN	mkdir -p /var/lin/mysql
 #------------------------------------
 
 COPY	/tools/wordpress_db.sql /

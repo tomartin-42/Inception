@@ -52,3 +52,6 @@ inW:
 
 inM:
 	docker exec -it MariaDB bash
+
+inrN:
+	docker exec -it NGINX bash
