@@ -79,7 +79,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: "${HOME}/data/mysql/"
+      device: "${HOME}/data/"
 
 networks:
   front:

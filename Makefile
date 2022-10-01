@@ -17,7 +17,7 @@ ALL_VOLUMES:= $(shell docker volume ls -q)
 all:
 	#mkdir /home/tomartin/Inception/data/webserver
 	mkdir -p $(HOME)/data/
-	mkdir -p $(HOME)/data/mysql/
+#	mkdir -p $(HOME)/data/mysql/
 	docker compose -f $(COMPOSE_PATH) up -d
 
 clean: 
